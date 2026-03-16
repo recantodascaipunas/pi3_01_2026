@@ -1,13 +1,9 @@
 from flask import Flask, render_template
-from models import db
+from .models import db
 
 app = Flask(__name__)
 
-# Configurações
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-
-# Iniciando extensões
 
 db.init_app(app)
 

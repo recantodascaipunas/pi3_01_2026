@@ -1,11 +1,5 @@
-import sys
-import os
 import pytest
-
-# adiciona a raiz do projeto no path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from app import app
+from pi3_01_2026.app import app
 
 
 @pytest.fixture
