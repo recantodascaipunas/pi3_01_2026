@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from models import db
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ db.init_app(app)
 
 @app.route('/')
 def home():
-    return 'Crianção do app flask'
+    return render_template('home.html')
 
 if __name__ == '__main__':
     with app.app_context():
