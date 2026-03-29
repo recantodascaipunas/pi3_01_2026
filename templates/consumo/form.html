@@ -1,4 +1,4 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 
 {% block title %} Consumo {% endblock %}
 
@@ -6,30 +6,89 @@
 
 <h3> Consumo </h3>
 
-<form action="">
+<form action="{{ url_for('routes_bp.inserir_consumo') }}" method="POST">
 
     Gênero:
-    <select name="genero" id="genero">
-        <!-- Informações vindas do back-end -->
+    <select id="produto_id" name="produto_id" required></select>
+
+    <br>
+
+    Lote (validade):
+    <select id="lote_id" name="lote_id" required>
+        <option value="">-- Selecione o lote --</option>
     </select>
+
     <br>
+
     Quantidade:
-    <input type="number" name="quant" id="quant">
+    <input type="number" step="0.01" name="quantidade" id="quantidade" required>
+
     <br>
+
     Data:
-    <input type="date" name="dia_consumo" id="dia_consumo">
+    <input type="date" name="data" id="data" required>
+
     <br>
+
     Refeição:
-    <select name="ref" id="ref">
+    <select name="refeicao" id="refeicao">
         <option value="" selected disabled>-- Selecione --</option>
         <option value="Lanche">Lanche</option>
         <option value="Almoço">Almoço</option>
     </select>
+
     <br>
-    Responsável
-    <input type="text" name="resp" id="resp">
+
+    Nº de alunos:
+    <input type="number" name="numero_alunos" id="numero_alunos">
+
+    <br>
+
+    Responsável:
+    <input type="text" name="responsavel" id="responsavel">
+
     <br>
     <input type="submit" value="Adicionar">
 </form>
+
+<script>
+async function carregarProdutos() {
+    const response = await fetch('/api/genero');
+    const data = await response.json();
+
+    const select = document.getElementById('produto_id');
+
+    data.forEach(p => {
+        const option = document.createElement('option');
+        option.value = p.id;
+        option.textContent = p.nome;
+        select.appendChild(option);
+    });
+}
+
+async function carregarLotes(produto_id) {
+    const response = await fetch(`/api/lotes/${produto_id}`);
+    const data = await response.json();
+
+    const select = document.getElementById('lote_id');
+    select.innerHTML = '<option value="">-- Selecione o lote --</option>';
+
+    data.forEach(lote => {
+        const option = document.createElement('option');
+        option.value = lote.id;
+        option.textContent = `Val: ${lote.validade} | Qtd: ${lote.quantidade}`;
+        select.appendChild(option);
+    });
+}
+
+// Espera o DOM carregar
+window.addEventListener('DOMContentLoaded', () => {
+    carregarProdutos();
+
+    document.getElementById('produto_id').addEventListener('change', function () {
+        carregarLotes(this.value);
+    });
+});
+</script>
 
 {% endblock %}
