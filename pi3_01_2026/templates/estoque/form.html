@@ -3,28 +3,43 @@
 {% block title %} Entrada no Estoque {% endblock %}
 
 {% block body %}
+<header class="content-header mb-4 d-flex justify-content-between align-items-center">
+    <div style="width: 100%;">
+        <h1>Entrada no Estoque</h1>
+        <p>Cadastre um novo lote</p>
+    </div>
+    <div>
+        <a href="{{url_for('estoque.listar_estoque')}}" class="btn btn-success">Voltar</a>
+    </div>
+</header>
 
-<h3> Entrada no Estoque </h3>
-
-<form action="/estoque/inserir" method="post">
-
-    <select name="genero" id="genero">
-        <option value="" selected disabled>-- Selecione --</option>
-        {% for produto in produtos %}
-        <option value="{{ produto.id }}">{{ produto.nome }}</option>
-        {% endfor %}
-    </select>
-    <br>
-    Data de recebimento:
-    <input type="date" name="entrada" id="entrada">
-    <br>
-    Data de validade:
-    <input type="date" name="validade" id="validade">
-    <br>
-    Quantidade:
-    <input type="number" name="quant" id="quant">
-    <br>
-    <input type="submit" value="Adicionar">
+<form action="/estoque/inserir" method="post" class="container-fluid">
+    
+    <div class="row">
+        <div class="col-12 m-1">
+            <select name="genero" id="genero" class="form-control">
+                <option value="" selected disabled>-- Selecione --</option>
+                {% for produto in produtos %}
+                <option value="{{ produto.id }}">{{ produto.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-12 m-1">
+            <label for="entrada">Data de recebimento:</label>
+            <input type="date" name="entrada" id="entrada" class="form-control">
+        </div>
+        <div class="col-12 m-1">
+            <label for="validade">Data de validade:</label>
+            <input type="date" name="validade" id="validade" class="form-control">
+        </div>
+        <div class="col-12 m-1">
+            <label for="quant" class="form-label">Quantidade:</label>
+            <input type="number" name="quant" id="quant" class="form-control">
+        </div>
+        <div class="col-12 m-2">
+            <input type="submit" value="Adicionar" class="form-control btn btn-success">
+        </div>
+    </div>
 </form>
 
 {% endblock %}

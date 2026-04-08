@@ -5,17 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> {% block title %} Document {% endblock %} </title>
     <link rel="stylesheet" href={{ url_for('static', filename = 'css/style.css') }}>
+    <link rel="stylesheet" href={{ url_for('static', filename = 'css/bootstrap.min.css') }}>
+
+     <style>
+      body { min-height: 100vh; }
+      .sidebar {
+        width: 300px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding-top: 1rem;
+        background: #f8f9fa;
+        border-right: 1px solid #dee2e6;
+      }
+      .content {
+        margin-left: 300px;
+        padding: 1.5rem;
+      }
+      @media (max-width: 767.98px) {
+        .sidebar { position: relative; width: 100%; height: auto; border-right: none; }
+        .content { margin-left: 0; }
+      }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li> <a href="{{ url_for('estoque.listar_estoque') }}"> Estoque </a> </li>
-            <li> <a href="{{ url_for('genero.listar_genero') }}"> Genero Alimenticio </a> </li>
-            <li> <a href="{{ url_for('consumo.listar_consumo') }}"> Consumo </a> </li>
+    <nav class="sidebar">
+      <div class="px-3 pb-3">
+        <a class="d-flex align-items-center mb-3 text-decoration-none">
+          <span class="fs-5 fw-semibold">Controle de Estoque</span>
+        </a>
+
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link" id="default-item" href="{{ url_for('estoque.listar_estoque') }}">Estoque</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="genero" href="{{ url_for('genero.listar_genero') }}">Gênero alimentício</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="consumo" href="{{ url_for('consumo.listar_consumo') }}">Consumo</a>
+          </li>
         </ul>
+      </div>
     </nav>
+
+    <main class="content">
     {% block body %}
 
     {% endblock %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        switch (window.location.pathname) {
+            case '/genero':
+                document.getElementById('genero').classList.add('active');
+                break
+            case '/genero/form':
+                document.getElementById('genero').classList.add('active');
+                break
+            case '/consumo':
+                document.getElementById('consumo').classList.add('active');
+                break
+            case '/consumo/form':
+                document.getElementById('consumo').classList.add('active');
+                break
+            default:
+                document.getElementById('default-item').classList.add('active');
+        }
+    </script>
 </body>
 </html>

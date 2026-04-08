@@ -1,24 +1,22 @@
 /* Estilo para Nav e Tabelas  */
 
-nav{
-  margin-bottom: 5%
+.default-table {
+  border-radius: 05px;
+  width: 100%;
 }
 
-ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-evenly
+.table-header {
+  border-left: 01px solid rgb(230, 230, 230);
+  border-right: 01px solid rgb(230, 230, 230);
+  border-top: 01px solid rgb(230, 230, 230);
+  padding: 10px;
 }
-    
-table,tr,td{
-  border: 1px solid #555;
+
+.default-table,
+.default-table tr,
+.default-table td,
+.default-table th {
   border-collapse: collapse;
-  padding: 5px;
-  margin: auto
+  border: 01px solid rgb(230, 230, 230);
+  padding: 10px;
 }
-
-h3{
-    
-    text-align: center;
-}
-

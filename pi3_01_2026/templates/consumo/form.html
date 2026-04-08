@@ -3,52 +3,56 @@
 {% block title %} Consumo {% endblock %}
 
 {% block body %}
+<header class="content-header mb-4 d-flex justify-content-between align-items-center">
+    <div style="width: 100%;">
+        <h1>Consumo</h1>
+        <p>Cadastre um novo consumo</p>
+    </div>
+    <div>
+        <a href="{{url_for('consumo.listar_consumo')}}" class="btn btn-success">Voltar</a>
+    </div>
+</header>
 
-<h3> Consumo </h3>
-
-<form action="{{ url_for('consumo.inserir_consumo') }}" method="POST">
-
-    Gênero:
-    <select id="produto_id" name="produto_id" required></select>
-
-    <br>
-
-    Lote (validade):
-    <select id="lote_id" name="lote_id" required>
-        <option value="">-- Selecione o lote --</option>
-    </select>
-
-    <br>
-
-    Quantidade:
-    <input type="number" step="0.01" name="quantidade" id="quantidade" required>
-
-    <br>
-
-    Data:
-    <input type="date" name="data" id="data" required>
-
-    <br>
-
-    Refeição:
-    <select name="refeicao" id="refeicao">
-        <option value="" selected disabled>-- Selecione --</option>
-        <option value="Lanche">Lanche</option>
-        <option value="Almoço">Almoço</option>
-    </select>
-
-    <br>
-
-    Nº de alunos:
-    <input type="number" name="numero_alunos" id="numero_alunos">
-
-    <br>
-
-    Responsável:
-    <input type="text" name="responsavel" id="responsavel">
-
-    <br>
-    <input type="submit" value="Adicionar">
+<form action="{{ url_for('consumo.inserir_consumo') }}" method="POST" class="container-fluid">
+    <div class="row">
+        <div class="col-12 m-1">
+            <label for="produto_id" class="form-label">Gênero:</label>
+            <select id="produto_id" name="produto_id" required class="form-control"></select>
+        </div>
+        <div class="col-12 m-1">
+            <label for="lote_id" class="form-label">Lote (validade):</label>
+            <select id="lote_id" name="lote_id" required class="form-control">
+                <option value="">-- Selecione o lote --</option>
+            </select>
+        </div>
+        <div class="col-12 m-1">
+            <label for="quantidade" class="form-label">Quantidade:</label>
+            <input type="number" step="0.01" name="quantidade" id="quantidade" required class="form-control">
+        </div>
+        <div class="col-12 m-1">
+            <label for="data" class="form-label">Data:</label>
+            <input type="date" name="data" id="data" required class="form-control">
+        </div>
+        <div class="col-12 m-1">
+            <label for="refeicao" class="form-label">Refeição:</label>
+            <select name="refeicao" id="refeicao" class="form-control">
+                <option value="" selected disabled>-- Selecione --</option>
+                <option value="Lanche">Lanche</option>
+                <option value="Almoço">Almoço</option>
+            </select>
+        </div>
+        <div class="col-12 m-1">
+            <label for="numero_alunos" class="form-label"">Nº de alunos:</label>
+            <input type="number" name="numero_alunos" class="form-control" id="numero_alunos">
+        </div>
+        <div class="col-12 m-1">
+            <label for="responsavel" class="form-label">Responsável:</label>
+            <input class="form-control" type="text" name="responsavel" id="responsavel">
+        </div>
+    </div>
+    <div class="col-12 m-2">
+        <input type="submit" value="Adicionar" class="form-control btn btn-success">
+    </div>
 </form>
 
 <script src="{{ url_for('static', filename = 'js/form_consumo.js')}}"></script>
