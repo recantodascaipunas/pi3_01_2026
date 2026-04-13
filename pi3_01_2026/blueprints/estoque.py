@@ -72,6 +72,7 @@ def api_lote():
             "produto": l.produto_nome(),
             "validade": l.data_formatada(),
             "quantidade_atual": l.quantidade_atual,
+            "vencido": l.esta_vencido()
         })
 
     # Ordena em Python pelo nome do produto
