@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import date
+from datetime import date, datetime
 
 db = SQLAlchemy()
 
@@ -46,6 +46,13 @@ class Lote(db.Model):
 
     def __repr__(self):
         return f"<Lote Produto {self.produto_id} - Validade {self.data_validade}>"
+    
+    def produto_nome(self):
+        return f"{self.produto.nome}"
+
+    def data_formatada(self):
+        return datetime.strftime(self.data_validade, '%d/%m/%Y')
+
 
 
 
