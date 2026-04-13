@@ -22,5 +22,30 @@ async function carregarEstoque() {
     }
 }
 
+async function carregarLote() {
+    try {
+        const response = await fetch("/api/lote");
+        const dados = await response.json();
+
+        const tbody = document.getElementById("tabela-lote");
+        tbody.innerHTML = "";
+
+        dados.forEach(item => {
+            const linha = `
+                <tr>
+                    <td>${item.produto}</td>
+                    <td>${item.validade}</td>
+                    <td>${item.quantidade_atual}</td>
+                </tr>
+            `;
+            tbody.innerHTML += linha;
+        });
+
+    } catch (erro) {
+        console.error("Erro ao carregar estoque:", erro);
+    }
+}
+
 // Executa ao carregar a página
 carregarEstoque();
+carregarLote();

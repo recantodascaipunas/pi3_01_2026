@@ -57,3 +57,24 @@ def api_estoque():
         })
 
     return jsonify(dados)
+
+
+# API Lote
+
+@estoque.route('/api/lote')
+def api_lote():
+    lote = Lote.query.filter(Lote.quantidade_atual > 0).all()
+
+    dados = []
+    for l in lote:
+        dados.append({
+            "id": l.id,
+            "produto": l.produto_nome(),
+            "validade": l.data_formatada(),
+            "quantidade_atual": l.quantidade_atual,
+        })
+
+    # Ordena em Python pelo nome do produto
+    dados.sort(key=lambda x: x["produto"])
+
+    return jsonify(dados)
